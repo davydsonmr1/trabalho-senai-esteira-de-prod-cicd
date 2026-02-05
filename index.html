@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visionary Portfolio | 2025</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+
+<body>
+
+    <div class="ambient-light"></div>
+    <div class="ambient-light"></div>
+
+    <main class="glass-card">
+
+        <header class="profile-header">
+            <div class="avatar-container">
+                <img src="./images/foto-perf.png" alt="Foto de Perfil do Desenvolvedor" class="avatar"
+                    onerror="this.src='https://via.placeholder.com/150/1e293b/FFFFFF?text=DEV'">
+            </div>
+            <h1 class="profile-name">Davydson Maciel Rafael</h1>
+            <p class="profile-role">Desenvolvedor Full Stack</p>
+        </header>
+
+        <nav class="nav-tabs" id="mainNav">
+            <div class="tab-indicator" id="indicator"></div>
+            <button class="tab-btn active" data-target="about">Sobre</button>
+            <button class="tab-btn" data-target="projects">Projetos</button>
+            <button class="tab-btn" data-target="skills">Skills</button>
+            <button class="tab-btn" data-target="contact">Contato</button>
+        </nav>
+
+        <section class="content-area">
+
+            <article id="about" class="tab-content active">
+                <p>
+                    Programador de Sistemas I com foco em PowerBuilder e Oracle SQL.
+
+                    Atualmente no Squad da Voltz, atuando com Typescript, NestJS e NextJS
+
+
+                    Cursando Tecnologia em Análise e Desenvolvimento de Sistemas na Doctum/Cataguases e o curso técnico
+                    em Desenvolvimento de Sistemas pelo SENAI, em parceria com o Grupo Energisa. Busco continuamente
+                    aprimorar minhas habilidades em programação e desenvolvimento de software, com experiência prática
+                    em criação de interfaces modernas e responsivas.
+                </p>
+            </article>
+
+            <article id="projects" class="tab-content">
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h4>Respiro App</h4>
+                        <p style="font-size: 0.8rem;">App para ajuda no controle da ansiedade</p>
+                        <a href="https://github.com/davydsonmr1/Respiro-App" class="btn-link">Ver Case →</a>
+                    </div>
+                    <div class="project-card">
+                        <h4>HDL Soluções</h4>
+                        <p style="font-size: 0.8rem;">Site para empresa de soluções tecnológicas</p>
+                        <a href="https://github.com/hdldev123/hdl-solucoes.github.io" class="btn-link">Ver Case →</a>
+                    </div>
+                </div>
+            </article>
+
+            <article id="skills" class="tab-content">
+                <h3>Stack Tecnológica</h3>
+                <div class="skills-list">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">React.js</span>
+                    <span class="skill-tag">CSS </span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">NestJS</span>
+                    <span class="skill-tag">Typescript</span>
+                    <span class="skill-tag">Power Builder</span>
+                    <span class="skill-tag">Oracle SQL</span>
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">NextJS</span>
+                </div>
+            </article>
+
+            <article id="contact" class="tab-content">
+                <h3>Entre em contato</h3>
+                <div class="contact-list">
+                    <a href="https://br.linkedin.com/in/davydsonmaciel" class="contact-btn">
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/davydsonmr1" class="contact-btn">
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const nav = document.getElementById('mainNav');
+            const indicator = document.getElementById('indicator');
+            const buttons = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.tab-content');
+
+            function moveIndicator(targetBtn) {
+                const width = targetBtn.offsetWidth;
+                const left = targetBtn.offsetLeft;
+
+                indicator.style.width = `${width}px`;
+                indicator.style.transform = `translateX(${left}px)`;
+            }
+
+            const initialActive = document.querySelector('.tab-btn.active');
+            if (initialActive) moveIndicator(initialActive);
+
+            nav.addEventListener('click', (e) => {
+                const clickedBtn = e.target.closest('.tab-btn');
+
+                if (!clickedBtn) return;
+
+
+                buttons.forEach(btn => btn.classList.remove('active'));
+                clickedBtn.classList.add('active');
+                moveIndicator(clickedBtn);
+
+
+                const targetId = clickedBtn.dataset.target;
+
+                contents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === targetId) {
+
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
