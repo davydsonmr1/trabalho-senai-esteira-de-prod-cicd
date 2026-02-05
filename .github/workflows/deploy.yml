@@ -62,9 +62,12 @@ jobs:
 
       - name: 3. Varredura de Termos Sensíveis e Comentários
         run: |
-          # Procura por TODO, FIXME, senha ou password 
-          if grep -rEi "TODO|FIXME|senha|password" . --exclude-dir=.git; then
-            echo "ERRO: Foram encontrados termos sensíveis ou comentários proibidos."
+          if grep -rEi "TODO|FIXME|senha|password" . \
+            --exclude-dir=.git \
+            --exclude-dir=.github \
+            --exclude="README.md" \
+            --exclude="readme.md"; then
+            echo "ERRO: Foram encontrados termos sensíveis ou comentários proibidos no código fonte."
             exit 1
           fi
 
