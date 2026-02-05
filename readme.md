@@ -1,4 +1,4 @@
-# 🚀 Portfólio Profissional: Desenvolvimento Web & DevOps
+# 🚀 Portfólio Profissional: Desenvolvimento Web & DevOps!
 
 ![CI Status](https://github.com/davydsonmr1/trabalho-senai-esteira-de-prod-cicd/actions/workflows/ci.yml/badge.svg)
 ![CD Status](https://github.com/davydsonmr1/trabalho-senai-esteira-de-prod-cicd/actions/workflows/cd.yml/badge.svg)
