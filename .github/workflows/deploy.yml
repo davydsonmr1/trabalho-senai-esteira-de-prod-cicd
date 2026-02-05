@@ -80,6 +80,12 @@ jobs:
         with:
           args: --verbose --no-progress "**/*.html"
 
+      - name: Notificação de Falha
+        if: failure()
+        run: |
+          echo "A pipeline falhou. Verifique os logs para corrigir os erros antes do deploy."
+          
+
       
 
     
