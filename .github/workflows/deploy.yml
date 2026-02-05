@@ -1,4 +1,4 @@
-name: Deploy to Github Pages
+name: CI - Integridade e Qualidade
 
 on:
   push:
@@ -44,3 +44,39 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+       
+      - name: 1. Validar existência do index.html
+        run: |
+          if [ ! -f index.html ]; then
+            echo "ERRO: O arquivo index.html não foi encontrado na raiz!" 
+            exit 1
+          fi
+
+      - name: 2. Verificar arquivos maiores que 500KB
+        run: |
+          LARGE_FILES=$(find . -type f -not -path '*/.*' -size +500k)
+          if [ ! -z "$LARGE_FILES" ]; then
+            echo "ERRO: Arquivos excedem o limite de 500KB: $LARGE_FILES" 
+            exit 1
+          fi
+
+      - name: 3. Varredura de Termos Sensíveis e Comentários
+        run: |
+          # Procura por TODO, FIXME, senha ou password 
+          if grep -rEi "TODO|FIXME|senha|password" . --exclude-dir=.git; then
+            echo "ERRO: Foram encontrados termos sensíveis ou comentários proibidos."
+            exit 1
+          fi
+
+      - name: 4. Execução do Linter (HTML Hint)
+        run: |
+          npx htmlhint "**/*.html" # Garante padrões técnicos 
+
+      - name: 5. Verificação de Links e Imagens
+        uses: lycheeverse/lychee-action@v1.9.0 
+        with:
+          args: --verbose --no-progress "**/*.html"
+
+      
+
+    
